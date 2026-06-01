@@ -53,7 +53,7 @@ pipeline {
 
         stage("Cleanup") {
             steps {
-                cleansWs()
+                cleanWs()
             }
         }
     }
