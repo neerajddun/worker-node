@@ -49,12 +49,12 @@ pipeline {
                     echo "Hit http://localhost:5000 to see the app"
                 '''
             }
-        }
 
         post {
             always {
                 cleanWs()
             }
+        }
         }
     }
 }
