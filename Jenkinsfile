@@ -111,7 +111,7 @@ pipeline {
             }
         }
 
-        stage('Deploy to Minikube') {
+        stage('Deploy to k8s') {
             steps {
                 sh """
                     kubectl set image deployment/flask-app \
