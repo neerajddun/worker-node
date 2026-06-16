@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'master',
-                    url: 'https://github.com/neerajddun/flask-app.git'
+                    url: 'https://github.com/neerajddun/devescops-jenkins.git'
             }
         }
 
