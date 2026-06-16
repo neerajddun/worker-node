@@ -47,29 +47,27 @@ pipeline {
         }
     }
 }
-
-        stage('OWASP Dependency-Check') {
-            steps {
-                dependencyCheck(
-                    additionalArguments: '''
-                        --scan .
-                        --format HTML
-                        --format XML
-                        --out owasp-report
-                        --enableExperimental
-                    ''',
-                    odcInstallation: 'OWASP-DC'
-                )
-            }
-
+stage('OWASP Dependency-Check') {
+    steps {
+        dependencyCheck(
+            additionalArguments: '''
+                --scan .
+                --format HTML
+                --format XML
+                --out owasp-report
+                --enableExperimental
+            ''',
+            odcInstallation: 'OWASP-DC'
+        )
+    }
+    post {                          // sibling of steps, not inside it
+        always {
+            dependencyCheckPublisher(
+                pattern: 'owasp-report/dependency-check-report.xml'
+            )
         }
-            post {
-                always {
-                    dependencyCheckPublisher(
-                        pattern: 'owasp-report/dependency-check-report.xml'
-                    )
-                }
-            }
+    }
+}
         
 
         stage('Trivy Image Scan') {
