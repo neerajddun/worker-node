@@ -144,7 +144,6 @@ stage('OWASP Dependency-Check') {
     }
 }
 
-}
 post {
 
     success {
@@ -163,5 +162,7 @@ post {
     always {
         cleanWs()
     }
+}
+
 }
 
