@@ -40,7 +40,7 @@ pipeline {
                 }
             }
         }
-        
+
 stage('OWASP Dependency-Check') {
     steps {
         catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
@@ -54,7 +54,7 @@ stage('OWASP Dependency-Check') {
                     --disableRetireJS
                     --noupdate
                     --nvdApiDelay 0
-                    --nvdMaxRetryCount 0
+                    --nvdMaxRetryCount 5
                 """,
                 odcInstallation: 'OWASP-DC'
             )
