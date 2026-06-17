@@ -51,6 +51,7 @@ pipeline {
                             --format XML
                             --out ${WORKSPACE}/owasp-report
                             --enableExperimental
+                            --noupdate
                         """,
                         odcInstallation: 'OWASP-DC'
                     )
