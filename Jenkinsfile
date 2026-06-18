@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'worker node' }
 
     environment {
         DOCKER_IMAGE  = "neeraj91/flask-app"
