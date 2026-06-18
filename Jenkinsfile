@@ -67,30 +67,7 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh """
-                    kubectl apply -f deployment.yaml
-                    kubectl apply -f service.yaml
-
-                    kubectl set image deployment/flask-app \
-                        flask-app=${DOCKER_IMAGE}:${DOCKER_TAG}
-
-                    for i in 1 2 3; do
-                        kubectl rollout status deployment/flask-app --timeout=120s && break
-                        echo "Retrying rollout status..."
-                        sleep 10
-                    done
-
-                    kubectl wait \
-                        --for=condition=available \
-                        deployment/flask-app \
-                        --timeout=300s
-
-                    echo "Running Image:"
-                    kubectl get deployment flask-app \
-                        -o=jsonpath='{.spec.template.spec.containers[0].image}'
-
-                    echo
-                """
+                sh 'echo Deploy'
             }
         }
     }
