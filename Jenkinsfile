@@ -43,65 +43,6 @@ pipeline {
             }
         }
 
-        /*
-        stage('OWASP Dependency-Check') {
-            steps {
-                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-                    dependencyCheck(
-                        additionalArguments: """
-                            --scan ${WORKSPACE}
-                            --format HTML
-                            --format XML
-                            --out ${WORKSPACE}/owasp-report
-                            --disableNodeAudit
-                            --disableRetireJS
-                            --noupdate
-                        """,
-                        odcInstallation: 'OWASP-DC'
-                    )
-                }
-
-                dependencyCheckPublisher(
-                    pattern: '**/dependency-check-report.xml'
-                )
-            }
-        }
-        */
-
-        /*
-        stage('Trivy Image Scan') {
-            steps {
-                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-                    sh """
-                        trivy image \
-                        --exit-code 1 \
-                        --severity CRITICAL \
-                        --no-progress \
-                        ${DOCKER_IMAGE}:${DOCKER_TAG}
-                    """
-                }
-            }
-
-            post {
-                always {
-                    sh """
-                        trivy image \
-                        --exit-code 0 \
-                        --severity HIGH,CRITICAL \
-                        --format json \
-                        --output trivy-report.json \
-                        ${DOCKER_IMAGE}:${DOCKER_TAG}
-                    """
-
-                    archiveArtifacts(
-                        artifacts: 'trivy-report.json',
-                        fingerprint: true
-                    )
-                }
-            }
-        }
-        */
-
         stage('Push to DockerHub') {
             steps {
                 withCredentials([
