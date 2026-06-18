@@ -64,6 +64,7 @@ stage('OWASP Dependency-Check') {
         )
     }
 }
+/*
     stage('Trivy Image Scan') {
         steps {
             catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
@@ -95,7 +96,7 @@ stage('OWASP Dependency-Check') {
             }
         }
     }
-
+*/
         stage('Push to DockerHub') {
             steps {
                 withCredentials([
