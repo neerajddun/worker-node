@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'worker-node' }
 
     environment {
         DOCKER_IMAGE  = "neeraj91/flask-app"
@@ -40,7 +40,7 @@ pipeline {
                 }
             }
         }
-
+/*
 stage('OWASP Dependency-Check') {
     steps {
         catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
@@ -64,7 +64,6 @@ stage('OWASP Dependency-Check') {
         )
     }
 }
-/*
     stage('Trivy Image Scan') {
         steps {
             catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
